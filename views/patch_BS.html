@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Physiological measurement</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Custom fonts for this template -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="/stylesheets/patchstyle_BS.css" type="text/css"/>
+
+    <!-- Bootstrap core chart -->
+    <script src="/chart/Chart.js"></script>
+    <script src="/chart/Chart.bundle.js"></script>
+
+    <!-- socket io -->
+    <script src="/socket.io/socket.io.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand">Physiological measurement</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a data-toggle="tab" class="text_size" href="#patch">Patch</a></li>
+            <li><a data-toggle="tab" class="text_size" href="#oximeter">Pulse Oximeter</a></li>
+            <li><a data-toggle="tab" class="nav-link" href="#link"><i class="fa fa-fw fa-link"></i>Link</a></li>
+        </ul>
+
+        <form class="navbar-form navbar-right">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search">
+                <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</nav>
+
+<!-- navbar -->
+
+<div class="tab-content">
+    <div id="patch" class="tab-pane fade in active">
+        <div class="row">
+            <div class="flex">
+                <div class="three">
+                    <div class="card h-50">
+                        <div class="card-header">
+                            <p class="text-center">
+                                Measurement ID</p>
+                        </div>
+                        <div class="card-body">
+                            <div style="height: 40px;">
+                                <div class="h-25 d-inline-block"></div>
+                                <div id="patchID"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex">
+                <div class="three-1">
+                    <div class="card h-50">
+                        <div class="card-header">
+                            <p class="text-center"><i class="fa fa-heartbeat"></i>
+                                Heart Rate Data</p>
+                        </div>
+                        <div class="card-body">
+                            <div style="height: 40px;">
+                                <div class="h-25 d-inline-block"></div>
+                                <div id="hrdata"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex">
+                <div class="three-2">
+                    <div class="card h-50">
+                        <div class="card-header">
+                            <p class="text-center"><i class="fa fa-heartbeat"></i>
+                                High Frequency Data</p>
+                        </div>
+                        <div class="card-body">
+                            <div style="height: 40px;">
+                                <div class="h-25 d-inline-block"></div>
+                                <div id="HFdata"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex">
+                <div class="three-3">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <p class="text-center"><i class="fa fa-heartbeat"></i>
+                                Low Frequency Data</p>
+                        </div>
+                        <div class="card-body">
+                            <div style="height: 40px;">
+                                <div class="h-25 d-inline-block"></div>
+                                <div id="LFdata"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mb-3">
+            <div class="card-header">
+                <p class="text-center"><i class="fa fa-area-chart"></i>
+                    Electrocardiogram</p>
+            </div>
+            <div class="card-body">
+                <canvas id="chart2" width="100%" height="30"></canvas>
+
+            </div>
+            <div class="card-footer small text-muted">
+                Updated yesterday at 11:59 PM
+            </div>
+        </div>
+
+
+        <div class="two">
+            <div class="card mb-3 ">
+                <div class="card-header">
+                    <p class="text-center"><i class="fa fa-table"></i>
+                        Patch Report </p>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive"></div>
+                    <table class="table table-bordered" width="100%" id="dataTable" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th class="HRV_table">檢測項目</th>
+                            <th class="HRV_table">數值</th>
+                            <th class="HRV_table">標準範圍/單位</th>
+                            <th class="HRV_table">說明</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr>
+                            <td>心率 Heart Rate</td>
+                            <td></td>
+                            <td>60~100 次/分</td>
+                            <td></td>
+
+                        </tr>
+                        <tr>
+                            <td>正常R-R間距變化 RRIV</td>
+                            <td></td>
+                            <td>高於15%</td>
+                            <td></td>
+
+                        </tr>
+                        <tr>
+                            <td>自律神經年齡 ANS Agex</td>
+                            <td></td>
+                            <td>低於實際年齡</td>
+                            <td></td>
+
+                        </tr>
+                        <tr>
+                            <td>自律神經總體功能 ANS</td>
+                            <td></td>
+                            <td> 平均數值 ms2</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>交感神經功能 SYM</td>
+                            <td></td>
+                            <td> 平均數值 ms2</td>
+                            <td></td>
+
+                        </tr>
+                        <tr>
+                            <td>副交感神經功能 VAG</td>
+                            <td></td>
+                            <td> 平均數值 ms2</td>
+                            <td></td>
+
+                        </tr>
+                        <tr>
+                            <td>交感調控 SYM modulation</td>
+                            <td></td>
+                            <td>0.8~1.5</td>
+                            <td></td>
+
+                        </tr>
+                        <tr>
+                            <td>自律神經偏向 Balance</td>
+                            <td></td>
+                            <td>-1.5~1.5</td>
+                            <td></td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer small text-muted">
+                    Updated yesterday at 11:59 PM
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- patch -->
+
+
+    <div id="oximeter" class="tab-pane fade">
+        <div class="row">
+            <div class="flex">
+                <div class="three">
+                    <div class="card h-50">
+                        <div class="card-header">
+                            <p class="text-center">
+                                Measurement ID</p>
+                        </div>
+                        <div class="card-body">
+                            <div style="height: 40px;">
+                                <div class="h-25 d-inline-block"></div>
+                                <div id="ID"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex">
+                <div class="three-2">
+                    <div class="card h-50">
+                        <div class="card-header">
+                            <p class="text-center"><i class="fa fa-tint"></i>
+                                Pulse Oximeter Data</p>
+                        </div>
+                        <div class="card-body">
+                            <div style="height: 40px;">
+                                <div class="h-25 d-inline-block"></div>
+                                <div id="spo2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex">
+                <div class="three-3">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <p class="text-center"><i class="fa fa-heartbeat"></i>
+                                Heart Rate Data</p>
+                        </div>
+                        <div class="card-body">
+                            <div style="height: 40px;">
+                                <div class="h-25 d-inline-block"></div>
+                                <div id="HR"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card mb-3">
+            <div class="card-header">
+                <p class="text-center"><i class="fa fa-area-chart"></i>
+                    Pulse Oximeter Chart</p>
+            </div>
+            <div class="card-body">
+                <div id="chart1" class="big-chart"></div>
+            </div>
+            <div class="card-footer small text-muted">
+                Updated yesterday at 11:59 PM
+            </div>
+        </div>
+    </div>
+    <!-- spo2 -->
+
+    <div id="link" class="tab-pane fade">
+        <div class="link">
+             <a href="https://circ.ahajournals.org/content/93/5/1043"><i class="fa fa-external-link"></i> Introduction of
+                Heart Rate Variability </a><br>
+            <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2903986"><i class="fa fa-external-link"></i>
+                Improvements in heart rate variability with exercise therapy </a><br>
+            <a href="https://en.wikipedia.org/wiki/Pulse_oximetry"><i class="fa fa-external-link"></i>
+                Introduction of Pulse Oximetry </a><br>
+            <a href="https://www.sleepdisordersguide.com/article/sleep-solutions/pulse-oximeter-working-of-pulse-oximeter-pulse-oximeter-and-sleep-apnea"><i class="fa fa-external-link"></i>
+                Pulse Oximeter And Sleep Apnea </a>
+        </div>
+    </div>
+</div>
+
+<!-- Custom scripts for this template -->
+<script src="/javascripts/patch_BS.js"></script>
+</body>
+</html>

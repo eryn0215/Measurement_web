@@ -1,0 +1,180 @@
+html {
+ position: relative;
+ min-height: 100%; }
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: normal;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+}
+body.sticky-footer {
+    margin-bottom: 56px; }
+
+.bg-dark {
+    background-color: #343a40!important;
+}
+.navbar-brand {
+
+    white-space: nowrap;
+}
+.text_size{
+    font-size: 150%;
+}
+.nav-link{
+    font-size: 150%;
+}
+body.fixed-nav {
+    padding-top: 56px; }
+p {
+    font-size: 200%;
+}
+.tab-content{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.content-wrapper {
+   min-height: calc(100vh - 56px);
+   padding-top: 1rem; }
+
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+
+}
+.two{
+padding-top: 10px;
+}
+.card-body {
+
+    padding: 1.75rem 3.25rem;
+}
+.card-header {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+.card-footer {
+    padding: 0.75rem 1.25rem;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+
+.lineChart{
+}
+.big-chart {
+    width:100%;
+    height:228px;
+
+}
+
+.line-chart {
+    width:150%;
+    height:100px;
+}
+.three{
+    padding:10px 20px 20px 30px;
+}
+.three-1{
+    padding-top:10px;
+    padding-bottom: 20px;
+    padding-right: 20px;
+}
+.three-2{
+    padding-top:10px;
+    padding-bottom: 20px;
+}
+.three-3{
+    padding:10px 30px 20px 20px;
+}
+
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+}
+.container{
+    display:-webkit-flex;
+    display:flex;
+}
+.flex{
+    -webkit-flex:2;
+    flex:2;
+    line-height: 30px;
+
+}
+.body {
+    width:40%;
+    height:40%
+}
+.flex1{
+    -webkit-flex:2;
+    flex:2;
+    line-height: 30px;
+}
+#patchID{
+    font-size: 200%;
+    font-weight: bold;
+    text-align: center;
+}
+#HFdata{
+    font-size: 200%;
+    font-weight: bold;
+    text-align: center;
+}
+#LFdata{
+    font-size: 200%;
+    font-weight: bold;
+    text-align: center;
+}
+#hrdata{
+    font-size: 200%;
+    font-weight: bold;
+    text-align: center;
+}
+#ID{
+    font-size: 200%;
+    font-weight: bold;
+    text-align: center;
+}
+#HR{
+    font-size: 200%;
+    font-weight: bold;
+    text-align: center;
+}
+#spo2{
+    font-size: 200%;
+    font-weight: bold;
+    text-align: center;
+}
+#chart1{
+    font-size: 15px;
+
+}
+#dataTable{
+    text-align: center;
+    font-size:14px;
+
+}
+th.HRV_table{
+    text-align: center;
+    font-size:14px;
+}
+.link{
+    font-size:20px;
+}
